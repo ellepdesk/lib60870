@@ -490,8 +490,8 @@ CP56Time2a_setFromMsTimestamp(CP56Time2a self, uint64_t timestamp)
 #endif
 
     CP56Time2a_setMillisecond(self, msPart);
-
     CP56Time2a_setSecond(self, tmTime.tm_sec);
+
 
     CP56Time2a_setMinute(self, tmTime.tm_min);
 
@@ -540,6 +540,7 @@ CP56Time2a_getFromBuffer(CP56Time2a self, uint8_t* msg, int msgSize, int startIn
 
     return true;
 }
+
 
 int
 CP56Time2a_getMillisecond(CP56Time2a self)
@@ -635,7 +636,6 @@ void
 CP56Time2a_setYear(CP56Time2a self, int value)
 {
     value = value % 100;
-
     self->encodedValue[6] = (uint8_t) ((self->encodedValue[6] & 0x80) + (value & 0x7f));
 }
 
