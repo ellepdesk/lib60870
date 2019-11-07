@@ -2202,7 +2202,7 @@ class InterrogationCommand(ctypes.Structure, IOBase):
         return lib.InterrogationCommand_create(
             pInterrogationCommand(self),
             c_int(ioa),
-            c_uint8(qoi)).contents
+            c_uint8(qoi.value)).contents
 
     def get_qoi(self):
         lib.InterrogationCommand_getQOI.restype = c_uint8
