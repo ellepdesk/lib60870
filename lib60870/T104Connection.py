@@ -115,6 +115,8 @@ class T104Connection():
             pInformationObject(command))
 
     def send_asdu(self, asdu):
+        if asdu.get_number_of_elements() == 0:
+            raise IEC104Error("cannot send asdu with 0 elements")
         lib.T104Connection_sendASDU.restype = c_bool
         return lib.T104Connection_sendASDU(self.con, asdu.pointer)
 

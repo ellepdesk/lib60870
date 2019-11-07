@@ -7,6 +7,8 @@ lib = lib60870.get_library()
 
 logger = logging.getLogger(__name__)
 
+class IEC104Error(Exception):
+    pass
 
 class BinaryCounterReading(ctypes.Structure):
     _fields_ = [("encodedValue", c_uint8 * 5)]

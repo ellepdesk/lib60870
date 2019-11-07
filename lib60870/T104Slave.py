@@ -6,7 +6,7 @@ from ctypes import *
 
 from lib60870.common import *
 from lib60870.CP56Time2a import CP56Time2a, pCP56Time2a
-from lib60870.asdu import pASDU
+from lib60870.asdu import pASDU, ASDU
 from lib60870.information_object import pInformationObject
 from lib60870 import lib60870
 
@@ -110,7 +110,9 @@ class T104Slave():
         lib.Slave_isRunning.restype = c_bool
         return lib.Slave_isRunning(self.con)
 
-    def enqueue_asdu(self, asdu):
+    def enqueue_asdu(self, asdu: ASDU):
+        if asdu.get_number_of_elements() == 0:
+            raise IEC104Error("cannot send asdu with 0 elements")
         logger.debug("calling Slave_enqueueASDU()")
         lib.Slave_enqueueASDU(self.con, asdu.pointer)
 
